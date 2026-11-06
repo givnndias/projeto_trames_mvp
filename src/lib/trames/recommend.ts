@@ -98,8 +98,11 @@ export function recommend(
 
     // Explanation built only from registered data.
     const delta = b.distance - shortest.distance;
-    const avoided = shortestBarriers.filter((x) => !barrierIds.includes(x)).map((x) => getBarrier(x).phrase);
-    const gained = featureIds.filter((x) => !shortestFeatures.includes(x)).map((x) => getFeature(x).phrase);
+    const avoided = shortestBarriers
+      .filter((x) => !barrierIds.includes(x))
+      .sort((x, y) => Number(!!getBarrier(y).blocks) - Number(!!getBarrier(x).blocks))
+      .map((x) => getBarrier(x).phrase);
+    const gained = featureIds.filter((x) => !shortestFeatures.includes(x)).slice(0, 3).map((x) => getFeature(x).phrase);
     const own = barrierIds.map((x) => getBarrier(x).phrase);
     let explanation: string;
     if (delta === 0) {
@@ -110,7 +113,7 @@ export function recommend(
       if (avoided.length) pos.push(`evita ${listPt(avoided)}`);
       if (gained.length) pos.push(`possui ${listPt(gained)}`);
       explanation = `Esta alternativa adiciona ${delta} metros em relação à rota mais curta`;
-      explanation += pos.length ? `, mas ${pos.join(" e ")}.` : ".";
+      explanation += pos.length ? `, mas ${pos.join(", além de ")}.` : ".";
       if (own.length) explanation += ` Atenção: possui ${listPt(own)}.`;
     }
     const missingSegs = b.segs.filter((s) => s.missingData).map((s) => s.missingData!);
