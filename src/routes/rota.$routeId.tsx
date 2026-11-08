@@ -8,7 +8,7 @@ import { dimensionLabels, getProfile } from "@/lib/trames/profiles";
 import { recommend } from "@/lib/trames/recommend";
 import { useTrames } from "@/lib/trames/store";
 import type { Dimension } from "@/lib/trames/types";
-import { CompatTag } from "./rotas";
+import { CompatTag } from "@/components/trames/CompatTag";
 
 export const Route = createFileRoute("/rota/$routeId")({
   head: () => ({

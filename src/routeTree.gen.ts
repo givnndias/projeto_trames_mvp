@@ -11,6 +11,8 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as PrioridadeRouteImport } from './routes/prioridade'
+import { Route as RotasRouteImport } from './routes/rotas'
+import { Route as RotaRouteIdRouteImport } from './routes/rota.$routeId'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -22,31 +24,49 @@ const PrioridadeRoute = PrioridadeRouteImport.update({
   path: '/prioridade',
   getParentRoute: () => rootRouteImport,
 } as any)
+const RotasRoute = RotasRouteImport.update({
+  id: '/rotas',
+  path: '/rotas',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RotaRouteIdRoute = RotaRouteIdRouteImport.update({
+  id: '/rota/$routeId',
+  path: '/rota/$routeId',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/prioridade': typeof PrioridadeRoute
+  '/rotas': typeof RotasRoute
+  '/rota/$routeId': typeof RotaRouteIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/prioridade': typeof PrioridadeRoute
+  '/rotas': typeof RotasRoute
+  '/rota/$routeId': typeof RotaRouteIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/prioridade': typeof PrioridadeRoute
+  '/rotas': typeof RotasRoute
+  '/rota/$routeId': typeof RotaRouteIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/prioridade'
+  fullPaths: '/' | '/prioridade' | '/rotas' | '/rota/$routeId'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/prioridade'
-  id: '__root__' | '/' | '/prioridade'
+  to: '/' | '/prioridade' | '/rotas' | '/rota/$routeId'
+  id: '__root__' | '/' | '/prioridade' | '/rotas' | '/rota/$routeId'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   PrioridadeRoute: typeof PrioridadeRoute
+  RotasRoute: typeof RotasRoute
+  RotaRouteIdRoute: typeof RotaRouteIdRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -65,12 +85,28 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PrioridadeRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/rotas': {
+      id: '/rotas'
+      path: '/rotas'
+      fullPath: '/rotas'
+      preLoaderRoute: typeof RotasRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/rota/$routeId': {
+      id: '/rota/$routeId'
+      path: '/rota/$routeId'
+      fullPath: '/rota/$routeId'
+      preLoaderRoute: typeof RotaRouteIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   PrioridadeRoute: PrioridadeRoute,
+  RotasRoute: RotasRoute,
+  RotaRouteIdRoute: RotaRouteIdRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
