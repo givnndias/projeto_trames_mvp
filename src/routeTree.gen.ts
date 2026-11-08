@@ -10,13 +10,26 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as MapaRouteImport } from './routes/mapa'
+import { Route as PreferenciasRouteImport } from './routes/preferencias'
 import { Route as PrioridadeRouteImport } from './routes/prioridade'
 import { Route as RotasRouteImport } from './routes/rotas'
+import { Route as PercursoRouteIdRouteImport } from './routes/percurso.$routeId'
 import { Route as RotaRouteIdRouteImport } from './routes/rota.$routeId'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MapaRoute = MapaRouteImport.update({
+  id: '/mapa',
+  path: '/mapa',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PreferenciasRoute = PreferenciasRouteImport.update({
+  id: '/preferencias',
+  path: '/preferencias',
   getParentRoute: () => rootRouteImport,
 } as any)
 const PrioridadeRoute = PrioridadeRouteImport.update({
@@ -29,6 +42,11 @@ const RotasRoute = RotasRouteImport.update({
   path: '/rotas',
   getParentRoute: () => rootRouteImport,
 } as any)
+const PercursoRouteIdRoute = PercursoRouteIdRouteImport.update({
+  id: '/percurso/$routeId',
+  path: '/percurso/$routeId',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const RotaRouteIdRoute = RotaRouteIdRouteImport.update({
   id: '/rota/$routeId',
   path: '/rota/$routeId',
@@ -37,35 +55,69 @@ const RotaRouteIdRoute = RotaRouteIdRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/mapa': typeof MapaRoute
+  '/preferencias': typeof PreferenciasRoute
   '/prioridade': typeof PrioridadeRoute
   '/rotas': typeof RotasRoute
+  '/percurso/$routeId': typeof PercursoRouteIdRoute
   '/rota/$routeId': typeof RotaRouteIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/mapa': typeof MapaRoute
+  '/preferencias': typeof PreferenciasRoute
   '/prioridade': typeof PrioridadeRoute
   '/rotas': typeof RotasRoute
+  '/percurso/$routeId': typeof PercursoRouteIdRoute
   '/rota/$routeId': typeof RotaRouteIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/mapa': typeof MapaRoute
+  '/preferencias': typeof PreferenciasRoute
   '/prioridade': typeof PrioridadeRoute
   '/rotas': typeof RotasRoute
+  '/percurso/$routeId': typeof PercursoRouteIdRoute
   '/rota/$routeId': typeof RotaRouteIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/prioridade' | '/rotas' | '/rota/$routeId'
+  fullPaths:
+    | '/'
+    | '/mapa'
+    | '/preferencias'
+    | '/prioridade'
+    | '/rotas'
+    | '/percurso/$routeId'
+    | '/rota/$routeId'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/prioridade' | '/rotas' | '/rota/$routeId'
-  id: '__root__' | '/' | '/prioridade' | '/rotas' | '/rota/$routeId'
+  to:
+    | '/'
+    | '/mapa'
+    | '/preferencias'
+    | '/prioridade'
+    | '/rotas'
+    | '/percurso/$routeId'
+    | '/rota/$routeId'
+  id:
+    | '__root__'
+    | '/'
+    | '/mapa'
+    | '/preferencias'
+    | '/prioridade'
+    | '/rotas'
+    | '/percurso/$routeId'
+    | '/rota/$routeId'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  MapaRoute: typeof MapaRoute
+  PreferenciasRoute: typeof PreferenciasRoute
   PrioridadeRoute: typeof PrioridadeRoute
   RotasRoute: typeof RotasRoute
+  PercursoRouteIdRoute: typeof PercursoRouteIdRoute
   RotaRouteIdRoute: typeof RotaRouteIdRoute
 }
 
@@ -76,6 +128,20 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/mapa': {
+      id: '/mapa'
+      path: '/mapa'
+      fullPath: '/mapa'
+      preLoaderRoute: typeof MapaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/preferencias': {
+      id: '/preferencias'
+      path: '/preferencias'
+      fullPath: '/preferencias'
+      preLoaderRoute: typeof PreferenciasRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/prioridade': {
@@ -92,6 +158,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof RotasRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/percurso/$routeId': {
+      id: '/percurso/$routeId'
+      path: '/percurso/$routeId'
+      fullPath: '/percurso/$routeId'
+      preLoaderRoute: typeof PercursoRouteIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/rota/$routeId': {
       id: '/rota/$routeId'
       path: '/rota/$routeId'
@@ -104,8 +177,11 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  MapaRoute: MapaRoute,
+  PreferenciasRoute: PreferenciasRoute,
   PrioridadeRoute: PrioridadeRoute,
   RotasRoute: RotasRoute,
+  PercursoRouteIdRoute: PercursoRouteIdRoute,
   RotaRouteIdRoute: RotaRouteIdRoute,
 }
 export const routeTree = rootRouteImport
