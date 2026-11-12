@@ -1,7 +1,7 @@
 import { createFileRoute, useNavigate, Link } from "@tanstack/react-router";
 import { CheckCircle2, ChevronLeft, ChevronRight, FlaskConical, Volume2, VolumeX, Flag } from "lucide-react";
 import { useEffect, useMemo, useState } from "react";
-import { SchematicMap } from "@/components/trames/SchematicMap";
+import { MapControls, SchematicMap } from "@/components/trames/SchematicMap";
 import { AppShell, Button, TopBar } from "@/components/trames/ui";
 import { getBarrier, getFeature, getPlace } from "@/lib/trames/data";
 import { WALK_M_PER_MIN, recommend } from "@/lib/trames/recommend";
@@ -25,6 +25,7 @@ function Percurso() {
   const { search, prefs, setPrefs } = useTrames();
   const navigate = useNavigate();
   const [step, setStep] = useState(0);
+  const [zoom, setZoom] = useState(1);
   const [speechOk, setSpeechOk] = useState(false);
   useEffect(() => { setSpeechOk(typeof window !== "undefined" && "speechSynthesis" in window); }, []);
 
@@ -81,8 +82,12 @@ function Percurso() {
       <p className="flex items-center justify-center gap-2 bg-beige py-2 text-sm font-semibold">
         <FlaskConical className="h-4 w-4" aria-hidden /> Percurso simulado — avanço manual, sem GPS
       </p>
-      <div className="h-[30dvh] bg-muted">
-        <SchematicMap className="h-full w-full" results={[r]} selectedId={r.route.id} origin={search.origin} destination={search.destination} progressNode={current?.node} />
+      <div className="relative h-[36dvh] bg-muted">
+        <SchematicMap className="h-full w-full" results={[r]} selectedId={r.route.id} origin={search.origin} destination={search.destination}
+          progressNode={current?.node} fit={path} zoom={zoom} />
+        <span className="absolute left-3 top-3 rounded-full bg-background px-3 py-1 text-sm font-medium shadow-card">● Posição simulada da etapa</span>
+        <MapControls className="absolute bottom-8 right-3" onZoomIn={() => setZoom((z) => Math.min(z * 1.4, 4))}
+          onZoomOut={() => setZoom((z) => Math.max(z / 1.4, 0.6))} onCenter={() => setZoom(1)} />
       </div>
       <section aria-live="polite" className="mx-5 -mt-6 rounded-3xl bg-primary p-5 text-primary-foreground shadow-card">
         <p className="text-sm font-semibold">{done ? "Chegada" : `Etapa ${step + 1} de ${steps.length - 1}`}</p>
