@@ -54,4 +54,4 @@ export const dimensionLabels = {
   rapidez: "Rapidez",
 } as const;
 
-export const getProfile = (id: string) => profiles.find((p) => p.id === id) ?? profiles[6]!;
+export const getProfile = (id: string) => profiles.find((p) => p.id === id) ?? profiles[6];

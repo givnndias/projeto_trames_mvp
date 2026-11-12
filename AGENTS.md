@@ -28,5 +28,3 @@ use the editor.
   own key and store it in Secrets.
 - **Secrets.** Lovable manages them. Do not put secret values in the repo.
 <!-- LOVABLE:END -->
-
-- Trames domain data and recommendation logic live in `src/lib/trames/` as pure modules, separate from UI, so they can later be swapped for an API.
