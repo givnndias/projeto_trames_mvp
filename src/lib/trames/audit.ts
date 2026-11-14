@@ -64,8 +64,8 @@ export function auditBase(input: unknown): AuditResult {
     for (const f of ["id_trecho", "origem_id", "destino_id"]) {
       chk(f, isIntLike(r[f]) && (r[f] as number) > 0, "ID deve ser inteiro positivo");
     }
-    chk("distancia_m", isNum(r.distancia_m) && r.distancia_m > 0, "distância deve ser número finito maior que zero");
-    chk("custo_recomendacao", isNum(r.custo_recomendacao) && r.custo_recomendacao >= 0, "custo deve ser número finito não negativo");
+    chk("distancia_m", isNum(r["distancia_m"]) && r["distancia_m"] > 0, "distância deve ser número finito maior que zero");
+    chk("custo_recomendacao", isNum(r["custo_recomendacao"]) && r["custo_recomendacao"] >= 0, "custo deve ser número finito não negativo");
     for (const f of ["IAR", "score_recursos", "score_seguranca", "score_avaliacao"]) {
       chk(f, isNum(r[f]) && (r[f] as number) >= 0 && (r[f] as number) <= 100, "deve estar entre 0 e 100");
     }
@@ -76,14 +76,14 @@ export function auditBase(input: unknown): AuditResult {
       chk(f, isNum(r[f]) && (r[f] as number) >= 0, "penalidade deve ser número finito não negativo");
     }
     for (const f of ["faixa_IAR", "confianca_dados"]) chk(f, typeof r[f] === "string", "deve ser texto");
-    if (isIntLike(r.qtd_ocorrencias) && isIntLike(r.qtd_ocorrencias_ativas) && r.qtd_ocorrencias_ativas > r.qtd_ocorrencias) {
+    if (isIntLike(r["qtd_ocorrencias"]) && isIntLike(r["qtd_ocorrencias_ativas"]) && r["qtd_ocorrencias_ativas"] > r["qtd_ocorrencias"]) {
       reasons.push("qtd_ocorrencias_ativas maior que qtd_ocorrencias");
     }
-    if (isIntLike(r.id_trecho)) {
-      if (seen.has(r.id_trecho)) reasons.push("id_trecho duplicado");
-      seen.add(r.id_trecho);
+    if (isIntLike(r["id_trecho"])) {
+      if (seen.has(r["id_trecho"])) reasons.push("id_trecho duplicado");
+      seen.add(r["id_trecho"]);
     }
-    const id = isIntLike(r.id_trecho) ? String(r.id_trecho) : `#${index}`;
+    const id = isIntLike(r["id_trecho"]) ? String(r["id_trecho"]) : `#${index}`;
     if (reasons.length) invalid.push({ id, index, reasons });
     else valid.push(r as unknown as RawTrecho);
   });

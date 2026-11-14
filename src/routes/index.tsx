@@ -2,7 +2,7 @@ import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { ArrowUpDown, MapPin, Flag, AlertCircle } from "lucide-react";
 import { useEffect, useState } from "react";
 import { AppShell, Button, Logo, SimBadge } from "@/components/trames/ui";
-import { places } from "@/lib/trames/data";
+import { nodeName } from "@/lib/trames/graph";
 import { useTrames } from "@/lib/trames/store";
 
 export const Route = createFileRoute("/")({
@@ -34,7 +34,8 @@ function Splash({ onDone }: { onDone: () => void }) {
 }
 
 function Home() {
-  const { search, setSearch, hydrated } = useTrames();
+  const { search, setSearch, hydrated, audit, result } = useTrames();
+  const nodes = result.graph?.nodes ?? [];
   const navigate = useNavigate();
   const [splash, setSplash] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -51,6 +52,7 @@ function Home() {
         : !search.origin ? "Escolha de onde você vai sair." : "Escolha para onde você quer ir.");
       return;
     }
+    if (result.status === "origem-invalida") { setError("Local inválido. Escolha origem e destino na lista."); return; }
     if (search.origin === search.destination) {
       setError("Origem e destino são o mesmo local. Escolha um destino diferente.");
       return;
@@ -70,12 +72,12 @@ function Home() {
         <h1 className="text-3xl font-bold">Para onde vamos?</h1>
         <div className="relative rounded-3xl bg-background p-4 shadow-card ring-1 ring-border">
           <PlaceSelect id="origem" label="Origem" icon={<MapPin className="h-5 w-5 text-brand-strong" aria-hidden />}
-            value={search.origin} disabled={!hydrated}
-            onChange={(v) => { setSearch({ origin: v, selectedRouteId: null }); setError(null); }} />
+            value={search.origin} disabled={!hydrated} nodes={nodes}
+            onChange={(v) => { setSearch({ origin: v, selectedKey: null }); setError(null); }} />
           <div className="my-2 flex items-center gap-2">
             <div className="h-px flex-1 bg-border" />
             <button
-              onClick={() => setSearch({ origin: search.destination, destination: search.origin, selectedRouteId: null })}
+              onClick={() => setSearch({ origin: search.destination, destination: search.origin, selectedKey: null })}
               className="tap flex items-center justify-center rounded-full border-2 border-brand bg-background text-brand-strong hover:bg-beige"
               aria-label="Inverter origem e destino"
             >
@@ -83,25 +85,26 @@ function Home() {
             </button>
           </div>
           <PlaceSelect id="destino" label="Destino" icon={<Flag className="h-5 w-5 text-success-strong" aria-hidden />}
-            value={search.destination} disabled={!hydrated}
-            onChange={(v) => { setSearch({ destination: v, selectedRouteId: null }); setError(null); }} />
+            value={search.destination} disabled={!hydrated} nodes={nodes}
+            onChange={(v) => { setSearch({ destination: v, selectedKey: null }); setError(null); }} />
         </div>
         {error && (
           <p role="alert" className="flex items-start gap-2 rounded-2xl bg-beige p-3 text-base">
             <AlertCircle className="mt-0.5 h-5 w-5 shrink-0 text-destructive" aria-hidden /> {error}
           </p>
         )}
-        <Button block onClick={submit}>Escolher prioridade</Button>
+        {audit.fatal && <p role="alert" className="rounded-2xl bg-beige p-3 text-base">{audit.fatal}</p>}
+        <Button block onClick={submit} disabled={!!audit.fatal}>Escolher prioridade</Button>
         <p className="text-sm text-muted-foreground">
-          Sem cadastro. A localização é escolhida manualmente nesta demonstração. Rotas cadastradas: Estação Central ↔ Biblioteca Municipal e Praça da Matriz ↔ Mercado Municipal.
+          Sem cadastro. A base atual identifica os locais apenas por número (Local 1 a {nodes.length}); nomes e endereços dependem de uma base complementar.
         </p>
       </section>
     </AppShell>
   );
 }
 
-function PlaceSelect({ id, label, icon, value, onChange, disabled }: {
-  id: string; label: string; icon: React.ReactNode; value: string; onChange: (v: string) => void; disabled?: boolean;
+function PlaceSelect({ id, label, icon, value, onChange, disabled, nodes }: {
+  id: string; label: string; icon: React.ReactNode; value: string; onChange: (v: string) => void; disabled?: boolean; nodes: number[];
 }) {
   return (
     <div>
@@ -111,7 +114,7 @@ function PlaceSelect({ id, label, icon, value, onChange, disabled }: {
         <select id={id} value={value} disabled={disabled} onChange={(e) => onChange(e.target.value)}
           className="tap w-full bg-transparent py-3 text-base font-medium outline-none">
           <option value="">Selecione um local</option>
-          {places.map((p) => <option key={p.id} value={p.id}>{p.name}</option>)}
+          {nodes.map((n) => <option key={n} value={String(n)}>{nodeName(n)}</option>)}
         </select>
       </div>
     </div>

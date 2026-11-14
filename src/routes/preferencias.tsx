@@ -1,8 +1,9 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { AppShell, TopBar, priorityIcon } from "@/components/trames/ui";
-import { DATA_SOURCE } from "@/lib/trames/data";
-import { profiles } from "@/lib/trames/profiles";
+import { Link } from "@tanstack/react-router";
+import { BASE_LABEL } from "@/lib/trames/base";
+import { profiles } from "@/lib/trames/costs";
 import { useTrames } from "@/lib/trames/store";
 import { cn } from "@/lib/utils";
 
@@ -65,7 +66,8 @@ function Prefs() {
         </section>
         <section className="rounded-2xl bg-beige p-4 text-base">
           <h2 className="text-lg font-semibold">Sobre os dados</h2>
-          <p className="mt-1">{DATA_SOURCE.label}. Seis locais, trechos, recursos e barreiras foram cadastrados para demonstrar a proposta. Nenhum dado de segurança é em tempo real.</p>
+          <p className="mt-1">Fonte: {BASE_LABEL}. Os locais são identificados por número; não há nomes, coordenadas nem dados em tempo real.</p>
+          <Link to="/tecnico" className="tap mt-2 inline-flex items-center font-semibold text-brand-strong underline">Abrir área técnica (auditoria e programação dinâmica)</Link>
           <p className="mt-2">O Trames não pede cadastro, diagnóstico, deficiência ou gênero. Preferências ficam apenas neste aparelho.</p>
         </section>
       </div>
