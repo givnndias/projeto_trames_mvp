@@ -14,9 +14,8 @@ import { Route as MapaRouteImport } from './routes/mapa'
 import { Route as PreferenciasRouteImport } from './routes/preferencias'
 import { Route as PrioridadeRouteImport } from './routes/prioridade'
 import { Route as RotasRouteImport } from './routes/rotas'
-import { Route as TecnicoRouteImport } from './routes/tecnico'
-import { Route as PercursoRouteKeyRouteImport } from './routes/percurso.$routeKey'
-import { Route as RotaRouteKeyRouteImport } from './routes/rota.$routeKey'
+import { Route as PercursoRouteIdRouteImport } from './routes/percurso.$routeId'
+import { Route as RotaRouteIdRouteImport } from './routes/rota.$routeId'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -43,19 +42,14 @@ const RotasRoute = RotasRouteImport.update({
   path: '/rotas',
   getParentRoute: () => rootRouteImport,
 } as any)
-const TecnicoRoute = TecnicoRouteImport.update({
-  id: '/tecnico',
-  path: '/tecnico',
+const PercursoRouteIdRoute = PercursoRouteIdRouteImport.update({
+  id: '/percurso/$routeId',
+  path: '/percurso/$routeId',
   getParentRoute: () => rootRouteImport,
 } as any)
-const PercursoRouteKeyRoute = PercursoRouteKeyRouteImport.update({
-  id: '/percurso/$routeKey',
-  path: '/percurso/$routeKey',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const RotaRouteKeyRoute = RotaRouteKeyRouteImport.update({
-  id: '/rota/$routeKey',
-  path: '/rota/$routeKey',
+const RotaRouteIdRoute = RotaRouteIdRouteImport.update({
+  id: '/rota/$routeId',
+  path: '/rota/$routeId',
   getParentRoute: () => rootRouteImport,
 } as any)
 
@@ -65,9 +59,8 @@ export interface FileRoutesByFullPath {
   '/preferencias': typeof PreferenciasRoute
   '/prioridade': typeof PrioridadeRoute
   '/rotas': typeof RotasRoute
-  '/tecnico': typeof TecnicoRoute
-  '/percurso/$routeKey': typeof PercursoRouteKeyRoute
-  '/rota/$routeKey': typeof RotaRouteKeyRoute
+  '/percurso/$routeId': typeof PercursoRouteIdRoute
+  '/rota/$routeId': typeof RotaRouteIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -75,9 +68,8 @@ export interface FileRoutesByTo {
   '/preferencias': typeof PreferenciasRoute
   '/prioridade': typeof PrioridadeRoute
   '/rotas': typeof RotasRoute
-  '/tecnico': typeof TecnicoRoute
-  '/percurso/$routeKey': typeof PercursoRouteKeyRoute
-  '/rota/$routeKey': typeof RotaRouteKeyRoute
+  '/percurso/$routeId': typeof PercursoRouteIdRoute
+  '/rota/$routeId': typeof RotaRouteIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -86,9 +78,8 @@ export interface FileRoutesById {
   '/preferencias': typeof PreferenciasRoute
   '/prioridade': typeof PrioridadeRoute
   '/rotas': typeof RotasRoute
-  '/tecnico': typeof TecnicoRoute
-  '/percurso/$routeKey': typeof PercursoRouteKeyRoute
-  '/rota/$routeKey': typeof RotaRouteKeyRoute
+  '/percurso/$routeId': typeof PercursoRouteIdRoute
+  '/rota/$routeId': typeof RotaRouteIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -98,9 +89,8 @@ export interface FileRouteTypes {
     | '/preferencias'
     | '/prioridade'
     | '/rotas'
-    | '/tecnico'
-    | '/percurso/$routeKey'
-    | '/rota/$routeKey'
+    | '/percurso/$routeId'
+    | '/rota/$routeId'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -108,9 +98,8 @@ export interface FileRouteTypes {
     | '/preferencias'
     | '/prioridade'
     | '/rotas'
-    | '/tecnico'
-    | '/percurso/$routeKey'
-    | '/rota/$routeKey'
+    | '/percurso/$routeId'
+    | '/rota/$routeId'
   id:
     | '__root__'
     | '/'
@@ -118,9 +107,8 @@ export interface FileRouteTypes {
     | '/preferencias'
     | '/prioridade'
     | '/rotas'
-    | '/tecnico'
-    | '/percurso/$routeKey'
-    | '/rota/$routeKey'
+    | '/percurso/$routeId'
+    | '/rota/$routeId'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -129,9 +117,8 @@ export interface RootRouteChildren {
   PreferenciasRoute: typeof PreferenciasRoute
   PrioridadeRoute: typeof PrioridadeRoute
   RotasRoute: typeof RotasRoute
-  TecnicoRoute: typeof TecnicoRoute
-  PercursoRouteKeyRoute: typeof PercursoRouteKeyRoute
-  RotaRouteKeyRoute: typeof RotaRouteKeyRoute
+  PercursoRouteIdRoute: typeof PercursoRouteIdRoute
+  RotaRouteIdRoute: typeof RotaRouteIdRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -171,25 +158,18 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof RotasRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/tecnico': {
-      id: '/tecnico'
-      path: '/tecnico'
-      fullPath: '/tecnico'
-      preLoaderRoute: typeof TecnicoRouteImport
+    '/percurso/$routeId': {
+      id: '/percurso/$routeId'
+      path: '/percurso/$routeId'
+      fullPath: '/percurso/$routeId'
+      preLoaderRoute: typeof PercursoRouteIdRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/percurso/$routeKey': {
-      id: '/percurso/$routeKey'
-      path: '/percurso/$routeKey'
-      fullPath: '/percurso/$routeKey'
-      preLoaderRoute: typeof PercursoRouteKeyRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/rota/$routeKey': {
-      id: '/rota/$routeKey'
-      path: '/rota/$routeKey'
-      fullPath: '/rota/$routeKey'
-      preLoaderRoute: typeof RotaRouteKeyRouteImport
+    '/rota/$routeId': {
+      id: '/rota/$routeId'
+      path: '/rota/$routeId'
+      fullPath: '/rota/$routeId'
+      preLoaderRoute: typeof RotaRouteIdRouteImport
       parentRoute: typeof rootRouteImport
     }
   }
@@ -201,9 +181,8 @@ const rootRouteChildren: RootRouteChildren = {
   PreferenciasRoute: PreferenciasRoute,
   PrioridadeRoute: PrioridadeRoute,
   RotasRoute: RotasRoute,
-  TecnicoRoute: TecnicoRoute,
-  PercursoRouteKeyRoute: PercursoRouteKeyRoute,
-  RotaRouteKeyRoute: RotaRouteKeyRoute,
+  PercursoRouteIdRoute: PercursoRouteIdRoute,
+  RotaRouteIdRoute: RotaRouteIdRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

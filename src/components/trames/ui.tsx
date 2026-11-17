@@ -8,7 +8,7 @@ import type { ButtonHTMLAttributes, ReactNode } from "react";
 import { cn } from "@/lib/utils";
 import logoH from "@/assets/trames_logo_horizontal.png.asset.json";
 import logoC from "@/assets/trames_logo_compact.png.asset.json";
-import type { PriorityId } from "@/lib/trames/costs";
+import type { PriorityId } from "@/lib/trames/types";
 
 export const btn = cva(
   "tap inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-base font-semibold transition-colors disabled:opacity-50 disabled:pointer-events-none",
@@ -115,16 +115,15 @@ export const priorityIcon: Record<PriorityId, typeof Home> = {
 };
 
 export function IarBadge({ value, size = "md" }: { value: number | null; size?: "md" | "lg" }) {
-  const shown = value === null ? null : Math.round(value);
   return (
     <div
       className={cn(
         "flex shrink-0 flex-col items-center justify-center rounded-2xl bg-beige text-ink",
         size === "lg" ? "h-24 w-24" : "h-16 w-16",
       )}
-      aria-label={shown === null ? "IAR indisponível por dados insuficientes" : `IAR médio ${shown} de 100`}
+      aria-label={value === null ? "IAR indisponível por dados insuficientes" : `IAR ${value} de 100`}
     >
-      <span className={cn("font-bold leading-none", size === "lg" ? "text-4xl" : "text-2xl")}>{shown ?? "—"}</span>
+      <span className={cn("font-bold leading-none", size === "lg" ? "text-4xl" : "text-2xl")}>{value ?? "—"}</span>
       <span className="text-xs font-medium">IAR</span>
     </div>
   );
