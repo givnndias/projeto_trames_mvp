@@ -14,7 +14,7 @@ export function routeSegments(route: RouteDef, reversed = false): Segment[] {
   const path = reversed ? [...route.path].reverse() : route.path;
   const segs: Segment[] = [];
   for (let i = 0; i < path.length - 1; i++) {
-    const s = findSegment(path[i], path[i + 1]);
+    const s = findSegment(path[i]!, path[i + 1]!);
     if (s) segs.push(s);
   }
   return segs;

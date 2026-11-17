@@ -33,7 +33,7 @@ function Mapa() {
         </ul>
         <h2 className="mt-2 text-lg font-semibold">Conexões cadastradas</h2>
         <ul className="flex flex-col gap-2">
-          {pairs.map((k) => { const [a, b] = k.split("|"); const n = routes.filter((r) => `${r.from}|${r.to}` === k).length;
+          {pairs.map((k) => { const [a = "", b = ""] = k.split("|"); const n = routes.filter((r) => `${r.from}|${r.to}` === k).length;
             return <li key={k} className="rounded-2xl bg-beige p-3 text-base">{name(a)} ↔ {name(b)} · {n} rotas</li>; })}
         </ul>
         <p className="text-sm text-muted-foreground">Outras combinações não possuem rotas cadastradas nesta demonstração.</p>

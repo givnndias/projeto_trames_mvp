@@ -13,7 +13,7 @@ interface Props {
   origin?: string;
   destination?: string;
   onSelect?: (id: string) => void;
-  progressNode?: string;
+  progressNode?: string | undefined;
   className?: string;
 }
 
@@ -73,9 +73,9 @@ function MapInner({ results = [], selectedId, origin, destination, onSelect, pro
 }
 
 class MapBoundary extends Component<{ children: ReactNode }, { failed: boolean }> {
-  state = { failed: false };
+  override state = { failed: false };
   static getDerivedStateFromError() { return { failed: true }; }
-  render() {
+  override render() {
     if (this.state.failed)
       return (
         <div role="alert" className="flex h-full items-center justify-center p-6 text-center text-base">
