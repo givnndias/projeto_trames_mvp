@@ -71,7 +71,7 @@ function Rotas() {
           {loading ? (
             <div role="status" className="flex items-center gap-3 py-10 text-base"><Loader2 className="h-6 w-6 animate-spin text-brand-strong" /> Buscando rotas…</div>
           ) : rec.status === "sem-rotas" ? (
-            <Empty title="Nenhuma rota cadastrada" text="Ainda não há percursos cadastrados entre esses locais na região demonstrativa. Experimente Estação Central ↔ Biblioteca Municipal ou Praça da Matriz ↔ Mercado Municipal." />
+            <Empty title="Nenhuma rota cadastrada" text="Ainda não há percursos cadastrados entre esses locais na região demonstrativa. Experimente Estação Central ↔ Biblioteca Municipal ou Praça Vila Oliveira ↔ Mercado Municipal." />
           ) : (
             <>
               {rec.status === "sem-compativel" && (

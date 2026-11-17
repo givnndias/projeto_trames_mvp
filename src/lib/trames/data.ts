@@ -10,7 +10,8 @@ export const places: Place[] = [
   { id: "estacao", name: "Estação Central", short: "Estação", x: 60, y: 400 },
   { id: "biblioteca", name: "Biblioteca Municipal", short: "Biblioteca", x: 290, y: 80 },
   { id: "parque", name: "Parque das Águas", short: "Parque", x: 70, y: 150 },
-  { id: "praca", name: "Praça da Matriz", short: "Praça", x: 180, y: 250 },
+  // Real place name; position, segments and indicators below are SIMULATED (address/city pending confirmation).
+  { id: "praca", name: "Praça Vila Oliveira", short: "Vila Oliveira", x: 180, y: 250 },
   { id: "mercado", name: "Mercado Municipal", short: "Mercado", x: 320, y: 190 },
   { id: "hospital", name: "Hospital Regional", short: "Hospital", x: 200, y: 40 },
 ];
@@ -47,7 +48,7 @@ export const barriers: Barrier[] = [
 export const segments: Segment[] = [
   // Rota A
   { id: "s1", a: "estacao", b: "j2", name: "Rua do Comércio", length: 200, features: [], barriers: ["calcada_irregular"], crossings: 1 },
-  { id: "s2", a: "j2", b: "j4", name: "Escadaria da Matriz", length: 180, features: [], barriers: ["escada"], crossings: 0 },
+  { id: "s2", a: "j2", b: "j4", name: "Escadaria Central", length: 180, features: [], barriers: ["escada"], crossings: 0 },
   { id: "s3", a: "j4", b: "biblioteca", name: "Rua da Biblioteca", length: 220, features: ["calcada_boa"], barriers: [], crossings: 1 },
   // Rota B
   { id: "s4", a: "estacao", b: "j6", name: "Rua das Rampas", length: 250, features: ["rampa", "calcada_boa", "piso_tatil"], barriers: [], crossings: 1 },
@@ -60,17 +61,17 @@ export const segments: Segment[] = [
   { id: "s10", a: "parque", b: "biblioteca", name: "Passeio das Árvores", length: 320, features: ["sombra", "bancos", "rampa"], barriers: [], crossings: 1 },
   // Rota D
   { id: "s11", a: "j1", b: "j4", name: "Avenida Principal", length: 280, features: ["semaforo_sonoro", "sinalizacao", "iluminacao"], barriers: [], crossings: 2, missingData: "Condição das calçadas da Avenida Principal ainda não levantada." },
-  // Praça ↔ Mercado
-  { id: "s12", a: "praca", b: "j4", name: "Escadaria da Praça", length: 120, features: [], barriers: ["escada"], crossings: 0 },
+  // Praça Vila Oliveira ↔ Mercado — simulated segments, not real characteristics of the square
+  { id: "s12", a: "praca", b: "j4", name: "Escadaria simulada (trecho demo 1)", length: 120, features: [], barriers: ["escada"], crossings: 0 },
   { id: "s13", a: "j4", b: "mercado", name: "Rua do Mercado", length: 230, features: ["calcada_boa"], barriers: ["ladeira"], crossings: 1 },
-  { id: "s14", a: "praca", b: "j5", name: "Rua da Matriz", length: 140, features: ["sombra"], barriers: ["travessia_sem_semaforo"], crossings: 0 },
+  { id: "s14", a: "praca", b: "j5", name: "Rua simulada (trecho demo 2)", length: 140, features: ["sombra"], barriers: ["travessia_sem_semaforo"], crossings: 0 },
   { id: "s15", a: "j5", b: "mercado", name: "Degraus do Mercado", length: 270, features: ["bancos"], barriers: ["escada"], crossings: 1 },
 ];
 
 /** Routes are registered in one direction and served in both. */
 export const routes: RouteDef[] = [
   {
-    id: "rota-a", label: "Rota A", name: "Pela Escadaria da Matriz",
+    id: "rota-a", label: "Rota A", name: "Pela Escadaria Central",
     from: "estacao", to: "biblioteca", path: ["estacao", "j2", "j4", "biblioteca"],
     indicators: { acessibilidade: 25, seguranca: 60, orientacao: 65, conforto: 45, esforco: 45 },
   },
@@ -90,12 +91,12 @@ export const routes: RouteDef[] = [
     indicators: { acessibilidade: null, seguranca: 82, orientacao: 90, conforto: 48, esforco: 66 },
   },
   {
-    id: "rota-e", label: "Rota A", name: "Pela Escadaria da Praça",
+    id: "rota-e", label: "Rota A", name: "Pela escadaria (simulada)",
     from: "praca", to: "mercado", path: ["praca", "j4", "mercado"],
     indicators: { acessibilidade: 20, seguranca: 62, orientacao: 70, conforto: 50, esforco: 30 },
   },
   {
-    id: "rota-f", label: "Rota B", name: "Pelos Degraus do Mercado",
+    id: "rota-f", label: "Rota B", name: "Pelos degraus (simulada)",
     from: "praca", to: "mercado", path: ["praca", "j5", "mercado"],
     indicators: { acessibilidade: 35, seguranca: 48, orientacao: 55, conforto: 60, esforco: 50 },
   },

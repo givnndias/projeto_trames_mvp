@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { recommend } from "./recommend";
 import { profiles } from "./profiles";
+import { getPlace } from "./data";
 
 describe("Trames recommendation", () => {
   it("Rapidez recommends Rota A (600 m) when no restriction is selected", () => {
@@ -34,10 +35,15 @@ describe("Trames recommendation", () => {
     expect(r.results.find((x) => x.route.id === "rota-d")!.compatibility).toBe("insuficiente");
   });
 
-  it("no compatible route between Praça and Mercado for Acessibilidade", () => {
+  it("no compatible route between Praça Vila Oliveira and Mercado for Acessibilidade", () => {
     const r = recommend("praca", "mercado", "acessibilidade");
     expect(r.status).toBe("sem-compativel");
     expect(r.recommendedId).toBeNull();
+  });
+
+  it("Praça Vila Oliveira keeps id 'praca' and its 2 routes", () => {
+    expect(getPlace("praca")?.name).toBe("Praça Vila Oliveira");
+    expect(recommend("praca", "mercado", "rapidez").results).toHaveLength(2);
   });
 
   it("unregistered pair returns sem-rotas", () => {

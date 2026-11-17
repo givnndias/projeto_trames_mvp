@@ -93,7 +93,7 @@ function Home() {
         )}
         <Button block onClick={submit}>Escolher prioridade</Button>
         <p className="text-sm text-muted-foreground">
-          Sem cadastro. A localização é escolhida manualmente nesta demonstração. Rotas cadastradas: Estação Central ↔ Biblioteca Municipal e Praça da Matriz ↔ Mercado Municipal.
+          Sem cadastro. A localização é escolhida manualmente nesta demonstração. Rotas cadastradas: Estação Central ↔ Biblioteca Municipal e Praça Vila Oliveira ↔ Mercado Municipal.
         </p>
       </section>
     </AppShell>
