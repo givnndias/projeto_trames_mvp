@@ -7,22 +7,22 @@ export const DATA_SOURCE = {
 };
 
 export const places: Place[] = [
-  { id: "estacao", name: "Estação Central", short: "Estação", x: 60, y: 400 },
-  { id: "biblioteca", name: "Biblioteca Municipal", short: "Biblioteca", x: 290, y: 80 },
-  { id: "parque", name: "Parque das Águas", short: "Parque", x: 70, y: 150 },
+  { id: "estacao", name: "Estação Central", short: "Estação", x: 60, y: 410 },
+  { id: "biblioteca", name: "Biblioteca Municipal", short: "Biblioteca", x: 300, y: 80 },
+  { id: "parque", name: "Parque das Águas", short: "Parque", x: 60, y: 150 },
   // Real place name; position, segments and indicators below are SIMULATED (address/city pending confirmation).
-  { id: "praca", name: "Praça Vila Oliveira", short: "Vila Oliveira", x: 180, y: 250 },
-  { id: "mercado", name: "Mercado Municipal", short: "Mercado", x: 320, y: 190 },
-  { id: "hospital", name: "Hospital Regional", short: "Hospital", x: 200, y: 40 },
+  { id: "praca", name: "Praça Vila Oliveira", short: "Vila Oliveira", x: 240, y: 260 },
+  { id: "mercado", name: "Mercado Municipal", short: "Mercado", x: 340, y: 180 },
+  { id: "hospital", name: "Hospital Regional", short: "Hospital", x: 240, y: 130 },
 ];
 
 export const junctions: Junction[] = [
   { id: "j1", x: 60, y: 260 },
-  { id: "j2", x: 170, y: 340 },
+  { id: "j2", x: 180, y: 340 },
   { id: "j3", x: 300, y: 340 },
-  { id: "j4", x: 180, y: 170 },
-  { id: "j5", x: 290, y: 260 },
-  { id: "j6", x: 290, y: 410 },
+  { id: "j4", x: 180, y: 180 },
+  { id: "j5", x: 300, y: 260 },
+  { id: "j6", x: 300, y: 410 },
 ];
 
 export const features: Feature[] = [
@@ -47,9 +47,9 @@ export const barriers: Barrier[] = [
 
 export const segments: Segment[] = [
   // Rota A
-  { id: "s1", a: "estacao", b: "j2", name: "Rua do Comércio", length: 200, features: [], barriers: ["calcada_irregular"], crossings: 1 },
+  { id: "s1", via: [[120, 410], [120, 340]], a: "estacao", b: "j2", name: "Rua do Comércio", length: 200, features: [], barriers: ["calcada_irregular"], crossings: 1 },
   { id: "s2", a: "j2", b: "j4", name: "Escadaria Central", length: 180, features: [], barriers: ["escada"], crossings: 0 },
-  { id: "s3", a: "j4", b: "biblioteca", name: "Rua da Biblioteca", length: 220, features: ["calcada_boa"], barriers: [], crossings: 1 },
+  { id: "s3", via: [[180, 80]], a: "j4", b: "biblioteca", name: "Rua da Biblioteca", length: 220, features: ["calcada_boa"], barriers: [], crossings: 1 },
   // Rota B
   { id: "s4", a: "estacao", b: "j6", name: "Rua das Rampas", length: 250, features: ["rampa", "calcada_boa", "piso_tatil"], barriers: [], crossings: 1 },
   { id: "s5", a: "j6", b: "j3", name: "Travessa Acessível", length: 150, features: ["rampa", "calcada_boa"], barriers: [], crossings: 0 },
@@ -58,14 +58,14 @@ export const segments: Segment[] = [
   // Rota C
   { id: "s8", a: "estacao", b: "j1", name: "Rua da Estação", length: 200, features: ["calcada_boa"], barriers: [], crossings: 1 },
   { id: "s9", a: "j1", b: "parque", name: "Caminho do Parque", length: 260, features: ["sombra", "bancos"], barriers: ["terra", "pouca_iluminacao"], crossings: 0 },
-  { id: "s10", a: "parque", b: "biblioteca", name: "Passeio das Árvores", length: 320, features: ["sombra", "bancos", "rampa"], barriers: [], crossings: 1 },
+  { id: "s10", via: [[60, 80]], a: "parque", b: "biblioteca", name: "Passeio das Árvores", length: 320, features: ["sombra", "bancos", "rampa"], barriers: [], crossings: 1 },
   // Rota D
-  { id: "s11", a: "j1", b: "j4", name: "Avenida Principal", length: 280, features: ["semaforo_sonoro", "sinalizacao", "iluminacao"], barriers: [], crossings: 2, missingData: "Condição das calçadas da Avenida Principal ainda não levantada." },
+  { id: "s11", via: [[120, 260], [120, 180]], a: "j1", b: "j4", name: "Avenida Principal", length: 280, features: ["semaforo_sonoro", "sinalizacao", "iluminacao"], barriers: [], crossings: 2, missingData: "Condição das calçadas da Avenida Principal ainda não levantada." },
   // Praça Vila Oliveira ↔ Mercado — simulated segments, not real characteristics of the square
-  { id: "s12", a: "praca", b: "j4", name: "Escadaria simulada (trecho demo 1)", length: 120, features: [], barriers: ["escada"], crossings: 0 },
+  { id: "s12", via: [[240, 180]], a: "praca", b: "j4", name: "Escadaria simulada (trecho demo 1)", length: 120, features: [], barriers: ["escada"], crossings: 0 },
   { id: "s13", a: "j4", b: "mercado", name: "Rua do Mercado", length: 230, features: ["calcada_boa"], barriers: ["ladeira"], crossings: 1 },
   { id: "s14", a: "praca", b: "j5", name: "Rua simulada (trecho demo 2)", length: 140, features: ["sombra"], barriers: ["travessia_sem_semaforo"], crossings: 0 },
-  { id: "s15", a: "j5", b: "mercado", name: "Degraus do Mercado", length: 270, features: ["bancos"], barriers: ["escada"], crossings: 1 },
+  { id: "s15", via: [[340, 260]], a: "j5", b: "mercado", name: "Degraus do Mercado", length: 270, features: ["bancos"], barriers: ["escada"], crossings: 1 },
 ];
 
 /** Routes are registered in one direction and served in both. */

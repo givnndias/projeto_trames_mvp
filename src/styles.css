@@ -56,6 +56,12 @@
   --color-brand-strong: var(--brand-strong);
   --color-beige: var(--beige);
   --color-ink: var(--ink);
+  --color-map-land: var(--map-land);
+  --color-map-park: var(--map-park);
+  --color-map-street: var(--map-street);
+  --color-map-street-edge: var(--map-street-edge);
+  --color-map-alt: var(--map-alt);
+  --color-map-alt-edge: var(--map-alt-edge);
   --color-success: var(--success);
   --color-success-strong: var(--success-strong);
   --font-sans: "Poppins", system-ui, sans-serif;
@@ -78,6 +84,12 @@
   --brand-strong: oklch(0.52 0.15 45);   /* deep orange for text on light */
   --beige: oklch(0.95 0.035 70);         /* #FFEBD6 */
   --ink: oklch(0.30 0 0);                /* #2E2E2E */
+  --map-land: oklch(0.965 0.004 90);
+  --map-park: oklch(0.9 0.06 145);
+  --map-street: oklch(1 0 0);
+  --map-street-edge: oklch(0.88 0.005 90);
+  --map-alt: oklch(0.72 0 0);
+  --map-alt-edge: oklch(0.6 0 0);
   --success: oklch(0.67 0.16 145);       /* #4CAF50 */
   --success-strong: oklch(0.48 0.13 145);
   --background: oklch(1 0 0);

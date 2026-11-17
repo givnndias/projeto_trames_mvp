@@ -58,6 +58,8 @@ export interface Segment {
   barriers: string[];
   /** Crossings with traffic lights on this segment. */
   crossings: number;
+  /** Intermediate schematic points from a to b, so lines follow streets. */
+  via?: [number, number][];
   /** Optional segment where data is known to be missing. */
   missingData?: string;
 }
