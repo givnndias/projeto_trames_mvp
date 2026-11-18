@@ -1,6 +1,6 @@
 import { Component, useCallback, useEffect, useMemo, useRef, useState, type ReactNode } from "react";
 import { Minus, Plus, Scan } from "lucide-react";
-import { getNode, places, segments } from "@/lib/trames/data";
+import { getNode, getPlace, places, segments } from "@/lib/trames/data";
 import { bounds, routePolyline, type Pt } from "@/lib/trames/geometry";
 import type { RouteResult } from "@/lib/trames/types";
 import { cn } from "@/lib/utils";
@@ -178,7 +178,7 @@ function MapInner({ results = [], selectedId, origin, destination, onSelect, pro
           <g pointerEvents="none">
             <circle cx={o.x} cy={o.y} r={fs(9)} fill="var(--color-background)" stroke="var(--color-ink)" strokeWidth={fs(3.5)} />
             <text x={o.x} y={o.y} dy={fs(24)} fontSize={fs(11)} fontWeight="700" textAnchor="middle" fill="var(--color-ink)"
-              stroke="var(--color-background)" strokeWidth={fs(3)} paintOrder="stroke">{"name" in o ? o.short : ""}</text>
+              stroke="var(--color-background)" strokeWidth={fs(3)} paintOrder="stroke">{getPlace(origin!)?.short}</text>
           </g>
         )}
         {d && (
@@ -186,7 +186,7 @@ function MapInner({ results = [], selectedId, origin, destination, onSelect, pro
             <path d="M0 0 C-4 -9 -13 -14 -13 -24 A13 13 0 1 1 13 -24 C13 -14 4 -9 0 0Z" fill="var(--color-ink)" stroke="var(--color-background)" strokeWidth="2" />
             <circle cx="0" cy="-24" r="5" fill="var(--color-background)" />
             <text x="0" y="-42" fontSize="11" fontWeight="700" textAnchor="middle" fill="var(--color-ink)"
-              stroke="var(--color-background)" strokeWidth="3" paintOrder="stroke">{"name" in d ? d.short : ""}</text>
+              stroke="var(--color-background)" strokeWidth="3" paintOrder="stroke">{getPlace(destination!)?.short}</text>
           </g>
         )}
         {prog && <circle cx={prog.x} cy={prog.y} r={fs(9)} fill="var(--color-brand)" stroke="var(--color-background)" strokeWidth={fs(3)} />}
