@@ -1,24 +1,65 @@
-# Pixel Perfect Recreation
+# TRAMES
 
-Implement exactly the screenshot and nothing else
+Seu caminho, suas prioridades.
 
-This project was built with [Lovable](https://lovable.dev).
+## Ficha da CitizenTech
 
-## Build with Lovable
+| Item | Descrição |
+| --- | --- |
+| Nome da solução | Trames |
+| Tema | Mobilidade urbana inclusiva e personalizada |
+| Problema | Percursos definidos apenas por distância e tempo podem conter barreiras e não atender às necessidades de cada pessoa. |
+| Público-alvo | Pessoas que se deslocam a pé, especialmente pessoas com deficiência, pessoas idosas e pessoas com mobilidade reduzida. |
+| Solução proposta | Aplicativo para comparar e recomendar percursos conforme as prioridades do usuário, explicando vantagens e limitações. |
+| Prioridades | Acessibilidade, segurança relativa, orientação, conforto, menor esforço, rapidez e equilíbrio. |
+| Território do piloto | Vila Oliveira, em Mogi das Cruzes — SP. |
+| Valor esperado | Apoiar a autonomia e permitir escolhas de percurso mais adequadas às necessidades do cidadão. |
+| ODS relacionados | ODS 10 — Redução das Desigualdades; ODS 11 — Cidades e Comunidades Sustentáveis. |
 
-Continue developing this project in the [Lovable editor](https://lovable.dev/projects/17ef3ac2-34a7-432e-a898-ea14327524ba).
+## Integrantes
 
-- **Ship faster**: describe what you want to build and Lovable handles the code.
-- **Stay in sync**: every change made in Lovable is committed straight to this repository.
-- **Full ownership**: this code is yours. Push to `main` on GitHub and your changes sync back into Lovable, ready for your next prompt.
+| Nome | RM |
+| --- | --- |
+| Giovanna Oliveira Ferreira Dias | 566647 |
+| Maria Laura Pereira Druzeic | 566634 |
+| Marianne Mukai Nishikawa | 568001 |
 
-## Development
+## Funcionalidades previstas no MVP
 
-Prefer working locally? You need Node.js and npm — [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating).
+- Seleção de origem e destino.
+- Escolha da prioridade de deslocamento.
+- Busca e comparação de rotas.
+- Explicação da recomendação.
+- Visualização do percurso no mapa.
+- Recálculo de rotas.
 
-```sh
-git clone <this-repository-url>
-cd <repository-name>
-npm i
-npm run dev
-```
+## Algoritmo e dados
+
+O módulo de programação dinâmica utiliza uma base JSON exportada por Data Science para buscar, classificar e recalcular caminhos.
+
+A classificação considera o custo de recomendação dos trechos. Os resultados apresentam distância, Índice de Adequação da Rota (IAR) e scores disponíveis.
+
+Os dados do protótipo são simulados. As recomendações não representam garantia de segurança ou acessibilidade.
+
+## Tecnologias
+
+- Lovable: protótipo da interface.
+- Python: módulo de programação dinâmica.
+- JSON: integração dos dados.
+- Oracle: modelo do banco relacional.
+- Git e GitHub: versionamento.
+
+## Execução do algoritmo
+
+Coloque `trames.py` e `trames_base_integracao.json` na mesma pasta e execute:
+
+    python trames.py
+
+Não é necessário instalar bibliotecas externas.
+
+Esse comando executa apenas o módulo Python no terminal. A integração com a interface e a geração do aplicativo instalável são etapas complementares.
+
+## Contexto acadêmico
+
+Engenharia de Software — FIAP  
+Global Solution 2026.2 — CitizenTech
