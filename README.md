@@ -18,14 +18,28 @@ O **Trames** é uma proposta de aplicativo que compara percursos a pé conforme 
 | **Valor esperado** | Mais autonomia e informação para escolher como se deslocar pela cidade. |
 | **ODS** | **10** — Redução das Desigualdades · **11** — Cidades e Comunidades Sustentáveis |
 
-## 📱 Como funciona
+## 🧭 Como consultar uma rota
 
-1. **Escolha o destino:** informe de onde vai sair e aonde deseja chegar.
-2. **Defina sua prioridade:** acessibilidade, segurança relativa, orientação, conforto, menor esforço, rapidez ou equilíbrio.
-3. **Compare os caminhos:** consulte distância, indicadores e limitações.
-4. **Entenda a recomendação:** descubra por que uma alternativa atende melhor à sua necessidade.
+1. Acesse o **[protótipo do Trames](https://givnndias.github.io/projeto_trames_mvp/)**.
+2. Selecione a **origem** e o **destino**.
+3. Toque em **Escolher prioridade** e selecione o que importa naquele percurso.
+4. Toque em **Comparar rotas** para consultar as alternativas.
+5. Abra **Ver detalhes** para entender a recomendação, os recursos e as limitações.
+6. Toque em **Iniciar percurso** para acompanhar as etapas da demonstração.
 
-A personalização considera o que importa naquele percurso, sem exigir diagnóstico ou declaração de deficiência.
+### Percursos disponíveis
+
+- **Estação Central ↔ Biblioteca Municipal**
+- **Praça Vila Oliveira ↔ Mercado Municipal**
+
+### Sugestão de teste
+
+Pesquise de **Estação Central** para **Biblioteca Municipal**:
+
+- Com **Rapidez**, observe a recomendação da rota de **600 metros**.
+- Com **Acessibilidade**, observe a alternativa de **850 metros**, que evita escadas.
+
+> Os percursos, os indicadores e o acompanhamento são demonstrativos. O mapa é esquemático e não representa navegação por GPS em tempo real.
 
 ## ✨ Escopo do MVP
 
